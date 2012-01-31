@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Lauri Piispanen]]></title>
-  <link href="http://lauripiispanen.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: JavaScript | Lauri Piispanen]]></title>
+  <link href="http://lauripiispanen.github.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://lauripiispanen.github.com/"/>
   <updated>2012-01-31T18:09:51+02:00</updated>
   <id>http://lauripiispanen.github.com/</id>
@@ -18,12 +18,12 @@
     <link href="http://lauripiispanen.github.com/blog/2012/01/31/building-a-backend-for-backbone-dot-js-todos-example-with-grails-and-mongodb/"/>
     <updated>2012-01-31T18:09:00+02:00</updated>
     <id>http://lauripiispanen.github.com/blog/2012/01/31/building-a-backend-for-backbone-dot-js-todos-example-with-grails-and-mongodb</id>
-    <content type="html"><![CDATA[<p>In case you haven&#8217;t yet tried it yet, <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> is a wonderful little JavaScript MVC framework. Ditto for <a href="http://grails.org/">Grails</a>! And soon you&#8217;ll see that they are a great match for each other - in this post, we&#8217;ll build a backend for the Backbone.js ToDo example using Grails and MongoDB.</p>
+    <content type="html"><![CDATA[<p>In case you haven't yet tried it yet, <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> is a wonderful little JavaScript MVC framework. Ditto for <a href="http://grails.org/">Grails</a>! And soon you'll see that they are a great match for each other - in this post, we'll build a backend for the Backbone.js ToDo example using Grails and MongoDB.</p>
 
 <!-- more -->
 
 
-<p>First, let&#8217;s create the Grails application and install mongodb plugin. We&#8217;ll also uninstall the default hibernate plugin. I&#8217;ll be using the new Grails 2.0 interactive console throughout this entry. First, edit <em>grails-app/conf/BuildConfig.groovy</em> and replace this line:</p>
+<p>First, let's create the Grails application and install mongodb plugin. We'll also uninstall the default hibernate plugin. I'll be using the new Grails 2.0 interactive console throughout this entry. First, edit <em>grails-app/conf/BuildConfig.groovy</em> and replace this line:</p>
 
 <pre><code>runtime ":hibernate:$grailsVersion"
 </code></pre>
@@ -33,7 +33,7 @@
 <pre><code>runtime ":mongodb:latest.integration"
 </code></pre>
 
-<p>&#8230;and configure Grails to mount into root context in development mode. Add this to <em>grails-app/conf/Config.groovy</em>:</p>
+<p>...and configure Grails to mount into root context in development mode. Add this to <em>grails-app/conf/Config.groovy</em>:</p>
 
 <pre><code>grails.app.context = "/"
 </code></pre>
@@ -44,7 +44,7 @@
 grails&gt; run-app
 </code></pre>
 
-<p>Next up, let&#8217;s copy the .js, .css and .png files from the standard backbone.js todo example into our <em>/web-app/</em> folder, and overwrite our <em>grails-app/views/index.gsp</em> with <em>index.html</em> from the example app. At this point the index file will appear if you start the app, but none of the JavaScript code is working - it&#8217;s pointing to <em>/test/vendor/</em> etc. We&#8217;ll change the app to use the Grails 2.0 Static Resources plugin and its bundles. You should have the following files in place:</p>
+<p>Next up, let's copy the .js, .css and .png files from the standard backbone.js todo example into our <em>/web-app/</em> folder, and overwrite our <em>grails-app/views/index.gsp</em> with <em>index.html</em> from the example app. At this point the index file will appear if you start the app, but none of the JavaScript code is working - it's pointing to <em>/test/vendor/</em> etc. We'll change the app to use the Grails 2.0 Static Resources plugin and its bundles. You should have the following files in place:</p>
 
 <pre><code>web-app/backbone.js
 web-app/underscore.js
@@ -93,7 +93,7 @@ web-app/todos.css
 &lt;meta name="layout" content="main"&gt;
 </code></pre>
 
-<p>At this point your todo application should <em>almost</em> work. It&#8217;s complaining about the missing localstorage plugin, which is fine because we&#8217;re about to replace it anyway. So just remove this line from <em>todos.js</em>:</p>
+<p>At this point your todo application should <em>almost</em> work. It's complaining about the missing localstorage plugin, which is fine because we're about to replace it anyway. So just remove this line from <em>todos.js</em>:</p>
 
 <pre><code>localStorage: new Store("todos"),
 </code></pre>
@@ -103,12 +103,12 @@ web-app/todos.css
 <pre><code>url: '/todos',
 </code></pre>
 
-<p>But now the todos app is complaining that it can&#8217;t find that URL. Which is fine - that just means that its happily trying to get our list of todos from the server, but can&#8217;t. No problemo, so that means we need to create a controller that will be our main AJAX endpoint.</p>
+<p>But now the todos app is complaining that it can't find that URL. Which is fine - that just means that its happily trying to get our list of todos from the server, but can't. No problemo, so that means we need to create a controller that will be our main AJAX endpoint.</p>
 
 <pre><code>grails&gt; create-controller todo.TodosController
 </code></pre>
 
-<p>&#8230;which nicely maps to the aforementioned <em>/todos</em> thanks to Grails default conventions. Sweet! We&#8217;ll also add an action to the controller that gives us a list of todo items. For now we&#8217;ll just return an empty list in JSON. This is where Grails converters come really handy:</p>
+<p>...which nicely maps to the aforementioned <em>/todos</em> thanks to Grails default conventions. Sweet! We'll also add an action to the controller that gives us a list of todo items. For now we'll just return an empty list in JSON. This is where Grails converters come really handy:</p>
 
 <pre><code>package todo
 
@@ -122,7 +122,7 @@ class TodosController {
 }
 </code></pre>
 
-<p>At this point our app is <em>nearly</em> working! We can see Backbone POSTing changes to our todos to the server. But nothing&#8217;s being persisted yet, so if we refresh the page, our todo list is blank again. So, what we need in order to persist our data, is a domain class that mirrors the one that we have in our Todo backbone.js example:</p>
+<p>At this point our app is <em>nearly</em> working! We can see Backbone POSTing changes to our todos to the server. But nothing's being persisted yet, so if we refresh the page, our todo list is blank again. So, what we need in order to persist our data, is a domain class that mirrors the one that we have in our Todo backbone.js example:</p>
 
 <pre><code>grails&gt; create-domain-class todo.Todo
 </code></pre>
@@ -143,18 +143,18 @@ class Todo {
 }
 </code></pre>
 
-<p>And we&#8217;ll also change our controller action to list all of our todo items:</p>
+<p>And we'll also change our controller action to list all of our todo items:</p>
 
 <pre><code>def index() {
     render( Todo.findAll() as JSON )
 }
 </code></pre>
 
-<p>But so far we don&#8217;t have any todos in the database, so the list is empty! Looking at AJAX traffic in Web Inspector, we see that whenever todos are updated, Backbone syncs them with the server via POSTs.</p>
+<p>But so far we don't have any todos in the database, so the list is empty! Looking at AJAX traffic in Web Inspector, we see that whenever todos are updated, Backbone syncs them with the server via POSTs.</p>
 
-<p><img src="http://lauripiispanen.github.com/images/posts/web_inspector.png"></p>
+<p><img src="/images/posts/web_inspector.png"></p>
 
-<p>So, to create some nice RESTful URLs for our todo app, we&#8217;ll just define them in <em>grails-app/conf/UrlMappings.groovy</em>:</p>
+<p>So, to create some nice RESTful URLs for our todo app, we'll just define them in <em>grails-app/conf/UrlMappings.groovy</em>:</p>
 
 <pre><code>"/todos/$id?"(controller: "todos") {
     action = [GET:"list", POST: "save", DELETE: "delete", PUT: "edit"]
@@ -178,7 +178,7 @@ class Todo {
 }
 </code></pre>
 
-<p>Now we can add and remove items. This is all nice and cool. However, what would a todo app be without a chance to complete some items? Backbone calls <em>.save()</em> on each update of a model item, and that translates to a PUT request to our backend. Based on our URL mappings, we&#8217;ll still need to implement an <em>edit()</em> action:</p>
+<p>Now we can add and remove items. This is all nice and cool. However, what would a todo app be without a chance to complete some items? Backbone calls <em>.save()</em> on each update of a model item, and that translates to a PUT request to our backend. Based on our URL mappings, we'll still need to implement an <em>edit()</em> action:</p>
 
 <pre><code>def edit() {
     def todo = Todo.findById(params.id)
@@ -187,7 +187,7 @@ class Todo {
 }
 </code></pre>
 
-<p>And that&#8217;s it! Our todo state now successfully propagates to the server! Job well done&#8230; oh wait! When we click on the checkboxes, nothing happens. And the original todo demo has a cool <em>&#8220;X tasks left&#8221;</em> that is not displayed in our application. What gives? Let&#8217;s take a look at the Grails view template we use - bring up <em>index.gsp</em>:</p>
+<p>And that's it! Our todo state now successfully propagates to the server! Job well done... oh wait! When we click on the checkboxes, nothing happens. And the original todo demo has a cool <em>"X tasks left"</em> that is not displayed in our application. What gives? Let's take a look at the Grails view template we use - bring up <em>index.gsp</em>:</p>
 
 <pre><code>&lt;% if (total) { %&gt;
     &lt;span class="todo-count"&gt;
@@ -205,7 +205,7 @@ class Todo {
 &lt;% } %&gt;
 </code></pre>
 
-<p>A-ha! There&#8217;s some underscore templates. But those look just like GSP scriptlets! And just as well, they don&#8217;t show up in the generated markup. We need to fix those. Luckily there is a way to change how underscore interpolates the templates. Just put this at the top of <em>todos.js</em>:</p>
+<p>A-ha! There's some underscore templates. But those look just like GSP scriptlets! And just as well, they don't show up in the generated markup. We need to fix those. Luckily there is a way to change how underscore interpolates the templates. Just put this at the top of <em>todos.js</em>:</p>
 
 <pre><code>_.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g,
@@ -213,7 +213,7 @@ class Todo {
 };
 </code></pre>
 
-<p>And now we can change our templates to a nicer (nicer to .gsp that is) format. Just change all <em>&lt;%=</em> and <em>%></em> scriptlets to <em>{{</em> and <em>}}</em> respectively, and <em>&lt;%</em> and <em>%></em> to <em>{!</em> and <em>!}</em> and voila! A complete todo application! Albeit there&#8217;s no authentication and multi-user and and and&#8230; Perhaps we&#8217;ll add those later!</p>
+<p>And now we can change our templates to a nicer (nicer to .gsp that is) format. Just change all <em>&lt;%=</em> and <em>%></em> scriptlets to <em></em> respectively, and <em>&lt;%</em> and <em>%></em> to <em>{!</em> and <em>!}</em> and voila! A complete todo application! Albeit there's no authentication and multi-user and and and... Perhaps we'll add those later!</p>
 ]]></content>
   </entry>
   
