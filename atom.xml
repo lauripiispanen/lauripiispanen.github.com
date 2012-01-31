@@ -4,7 +4,7 @@
   <title><![CDATA[Lauri Piispanen]]></title>
   <link href="http://lauripiispanen.github.com/atom.xml" rel="self"/>
   <link href="http://lauripiispanen.github.com/"/>
-  <updated>2012-01-31T18:09:51+02:00</updated>
+  <updated>2012-01-31T18:23:18+02:00</updated>
   <id>http://lauripiispanen.github.com/</id>
   <author>
     <name><![CDATA[Lauri Piispanen]]></name>
@@ -20,6 +20,8 @@
     <id>http://lauripiispanen.github.com/blog/2012/01/31/building-a-backend-for-backbone-dot-js-todos-example-with-grails-and-mongodb</id>
     <content type="html"><![CDATA[<p>In case you haven&#8217;t yet tried it yet, <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> is a wonderful little JavaScript MVC framework. Ditto for <a href="http://grails.org/">Grails</a>! And soon you&#8217;ll see that they are a great match for each other - in this post, we&#8217;ll build a backend for the Backbone.js ToDo example using Grails and MongoDB.</p>
 
+<p>You can fork the completed example application <a href="https://github.com/lauripiispanen/grails-backbone-mongodb-example">here</a>.</p>
+
 <!-- more -->
 
 
@@ -28,7 +30,7 @@
 <pre><code>runtime ":hibernate:$grailsVersion"
 </code></pre>
 
-<p>with this:</p>
+<p>with this to install the Grails MongoDB plugin:</p>
 
 <pre><code>runtime ":mongodb:latest.integration"
 </code></pre>

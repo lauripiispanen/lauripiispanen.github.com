@@ -30,6 +30,18 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-151402-10']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -92,6 +104,8 @@
 
 <div class="entry-content"><p>In case you haven&#8217;t yet tried it yet, <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> is a wonderful little JavaScript MVC framework. Ditto for <a href="http://grails.org/">Grails</a>! And soon you&#8217;ll see that they are a great match for each other - in this post, we&#8217;ll build a backend for the Backbone.js ToDo example using Grails and MongoDB.</p>
 
+<p>You can fork the completed example application <a href="https://github.com/lauripiispanen/grails-backbone-mongodb-example">here</a>.</p>
+
 <!-- more -->
 
 
@@ -100,7 +114,7 @@
 <pre><code>runtime ":hibernate:$grailsVersion"
 </code></pre>
 
-<p>with this:</p>
+<p>with this to install the Grails MongoDB plugin:</p>
 
 <pre><code>runtime ":mongodb:latest.integration"
 </code></pre>
