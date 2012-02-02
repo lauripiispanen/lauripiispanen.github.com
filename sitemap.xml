@@ -7,11 +7,17 @@
         <lastmod>2012-01-31T18:23:09+02:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://lauripiispanen.github.com/blog/2012/02/02/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/
+        </loc>
+        <lastmod>2012-02-02T14:13:57+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://lauripiispanen.github.com/blog/archives/</loc>
-        <lastmod>2012-01-31T18:23:09+02:00</lastmod>
+        <lastmod>2012-02-02T14:13:57+02:00</lastmod>
     </url>
     <url>
         <loc>http://lauripiispanen.github.com/</loc>
-        <lastmod>2012-01-31T18:23:09+02:00</lastmod>
+        <lastmod>2012-02-02T14:13:57+02:00</lastmod>
     </url>
 </urlset>

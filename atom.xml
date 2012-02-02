@@ -4,7 +4,7 @@
   <title><![CDATA[Lauri Piispanen]]></title>
   <link href="http://lauripiispanen.github.com/atom.xml" rel="self"/>
   <link href="http://lauripiispanen.github.com/"/>
-  <updated>2012-01-31T18:23:18+02:00</updated>
+  <updated>2012-02-02T14:14:17+02:00</updated>
   <id>http://lauripiispanen.github.com/</id>
   <author>
     <name><![CDATA[Lauri Piispanen]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Groovy primitive type cast gotcha when upgrading to Grails 2.0]]></title>
+    <link href="http://lauripiispanen.github.com/blog/2012/02/02/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/"/>
+    <updated>2012-02-02T14:13:00+02:00</updated>
+    <id>http://lauripiispanen.github.com/blog/2012/02/02/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building a backend for backbone.js Todos example with Grails and MongoDB]]></title>
