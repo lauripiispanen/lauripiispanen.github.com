@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Lauri Piispanen]]></title>
+  <link href="http://lauripiispanen.github.com/atom.xml" rel="self"/>
+  <link href="http://lauripiispanen.github.com/"/>
+  <updated>2012-04-25T17:56:07+03:00</updated>
+  <id>http://lauripiispanen.github.com/</id>
+  <author>
+    <name><![CDATA[Lauri Piispanen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What is the best IRC Server? How about Flowdock?]]></title>
+    <link href="http://lauripiispanen.github.com/blog/2012/04/25/what-is-the-best-irc-server-how-about-flowdock/"/>
+    <updated>2012-04-25T17:07:00+03:00</updated>
+    <id>http://lauripiispanen.github.com/blog/2012/04/25/what-is-the-best-irc-server-how-about-flowdock</id>
+    <content type="html"><![CDATA[<p>Being an avid IRC user, ever since our company started using <a href="http://www.flowdock.com/">Flowdock</a> I&#8217;ve been looking for ways to bridge it with IRC. Without an
+<a href="http://flowdock.uservoice.com/forums/36827-general/suggestions/635399-xmpp-jabber-integration">XMPP integration</a>, bitlbee was out of the question, and pretty
+much the only way of integrating seemed to be over the AJAX API. That is, until now&#8230;</p>
+
+<!--more-->
+
+
+<p>Today Flowdock released built-in <a href="https://www.flowdock.com/help/irc">IRC integration</a> and boy does it work amazingly!</p>
+
+<p><img src="http://lauripiispanen.github.com/images/posts/flowdock-irc.png"></p>
+
+<p>Above you can see an example of an irssi session. Influx shows our Github pushes and JIRA activity pretty nicely. We haven&#8217;t enabled many other streams to prevent information overload. Also our <a href="http://hubot.github.com/">Hubot</a> &#8216;Botney Spears&#8217; works seamlessly!</p>
+
+<p><img src="http://lauripiispanen.github.com/images/posts/flowdock-irc-hubot.png"></p>
+
+<p>It was relatively painless to set up Flowdock in irssi. First you need to set up a new network and (if you want to connect and login automatically).</p>
+
+<pre><code>/network add -autosendcmd "/^msg NickServ identify [your-e-mail] [your-password]" Flowdock
+/server add -ssl -network Flowdock -auto irc.flowdock.com 6697
+</code></pre>
+
+<p>And finally you need to connect to the server:</p>
+
+<pre><code>/connect Flowdock
+</code></pre>
+
+<p>BAM! You&#8217;re on Flowdock! You might want to <em>/window close</em> any channels you&#8217;re not participating in (in our case we had quite a few).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Best way to kill your HTML5 tablet app performance]]></title>
+    <link href="http://lauripiispanen.github.com/blog/2012/03/05/best-way-to-kill-html5-tablet-app-performance/"/>
+    <updated>2012-03-05T20:28:00+02:00</updated>
+    <id>http://lauripiispanen.github.com/blog/2012/03/05/best-way-to-kill-html5-tablet-app-performance</id>
+    <content type="html"><![CDATA[<p>As I was developing a cool new HTML5 (in the marketing sense) RIA tablet app, I noticed that it was acting a little slow. All the CSS transforms that were supposed to be hardware accelerated were stuttering slightly on the iPad 1, and quite a lot on Android devices. At first I just chalked it all up to the iPad 2:s beefier CPU, and the notoriously bad transformation performance on Android devices.</p>
+
+<p>That is until I found this piece of code. <!-- more -->Buried inside a <em>reset.css</em> file was <strong>this declaration</strong>:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">tap</span><span class="o">-</span><span class="n">highlight</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">,</span> <span class="m">0</span><span class="o">.</span><span class="m">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0</span><span class="n">ms</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">font</span><span class="o">-</span><span class="n">smoothing</span><span class="o">:</span> <span class="n">antialiased</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">backface</span><span class="o">-</span><span class="k">visibility</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0</span><span class="n">ms</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">font</span><span class="o">-</span><span class="n">smoothing</span><span class="o">:</span> <span class="n">antialiased</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">backface</span><span class="o">-</span><span class="k">visibility</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">select</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">khtml</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">select</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">select</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'>    <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">select</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">user</span><span class="o">-</span><span class="n">select</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Quite an eyeful, isn&#8217;t it? The highlight here is our tiny little <em>tranlateZ()</em> transform. I guess the original author intended to <a href="http://www.html5rocks.com/en/tutorials/speed/html5/">enable hardware acceleration</a> on the page. So what&#8217;s the problem with this selector? Why is it causing this huge hit on performance? It&#8217;s elementary, dear Watson! The answer you seek is <em>the C in CSS</em>: it stands for <em>cascading</em>. Allow me to demonstrate with this piece of CSS.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.rotating-example</span> <span class="o">*</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">60</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">60</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">transform</span><span class="o">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">60</span><span class="n">deg</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yes, it&#8217;s just an example. No, I don&#8217;t think descendant selectors are cool. But we&#8217;ll use this HTML as an example.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;rotating-example&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>              Upside down!
+</span><span class='line'>          <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>    
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>    
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<div class="rotating-example">
+    <div>
+        <div>
+            <div>
+                Upside down!
+            </div>
+        </div>  
+    </div>  
+</div>
+
+
+<p>As you&#8217;ll likely see (with a sufficiently modern browser), our div is upside down. Since the selector applies to all elements, the rotations cascade down the DOM, being applied one at a time at each descendant separately. In a similar manner the CSS star selector applies to <strong>every single element</strong> in your DOM <strong>individually</strong>. Now, usually the <em>translate3d()</em> would be applied rather quickly, without any consequences, but with a dense enough DOM tree, it all starts to add up - and the app slows down to a crawl.</p>
+
+<p>I removed the rule, committed, and performance was back up. Everything was nice and smooth on iPhone, Android and all the usual friends. In retrospect, I&#8217;m actually surprised the performance wasn&#8217;t even worse!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Groovy primitive type cast gotcha when upgrading to Grails 2.0]]></title>
+    <link href="http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/"/>
+    <updated>2012-02-23T18:13:00+02:00</updated>
+    <id>http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0</id>
+    <content type="html"><![CDATA[<p>When upgrading our Grails applications from 1.3.x to 2.0, I got burned by this slight change of semantics in Groovy 1.8.x:</p>
+
+<p>Groovy 1.7.9:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">groovy:</span><span class="mi">000</span><span class="o">&gt;</span> <span class="kc">null</span> <span class="n">as</span> <span class="kt">int</span>
+</span><span class='line'><span class="o">===&gt;</span> <span class="kc">null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Groovy 1.8.0:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">groovy:</span><span class="mi">000</span><span class="o">&gt;</span> <span class="kc">null</span> <span class="n">as</span> <span class="kt">float</span>
+</span><span class='line'><span class="n">ERROR</span> <span class="n">org</span><span class="o">.</span><span class="na">codehaus</span><span class="o">.</span><span class="na">groovy</span><span class="o">.</span><span class="na">runtime</span><span class="o">.</span><span class="na">typehandling</span><span class="o">.</span><span class="na">GroovyCastException</span><span class="o">:</span>
+</span><span class='line'><span class="n">Cannot</span> <span class="n">cast</span> <span class="n">object</span> <span class="err">&#39;</span><span class="kc">null</span><span class="err">&#39;</span> <span class="n">with</span> <span class="kd">class</span> <span class="err">&#39;</span><span class="nc">null</span><span class="err">&#39;</span> <span class="n">to</span> <span class="kd">class</span> <span class="err">&#39;</span><span class="nc">float</span><span class="err">&#39;</span><span class="o">.</span> <span class="n">Try</span> <span class="err">&#39;</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Float</span><span class="err">&#39;</span> <span class="n">instead</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Turns out this can bite you in quite many places. A very common pattern occurring in our taglibs was to cast attributes, even if they were optional. Like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">def</span> <span class="n">myTag</span> <span class="o">=</span> <span class="o">{</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">body</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">def</span> <span class="n">height</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">&quot;height&quot;</span><span class="o">)</span> <span class="n">as</span> <span class="kt">int</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which would&#8217;ve simply assigned <em>null</em> to <em>height</em> in Grails 1.3.x. Luckily you can just change your casts to boxed versions of the primitives (i.e. <em>as Integer</em>, <em>as Long</em> etc) and be done with it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">def</span> <span class="n">myTag</span> <span class="o">=</span> <span class="o">{</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">body</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="n">def</span> <span class="n">height</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">&quot;height&quot;</span><span class="o">)</span> <span class="n">as</span> <span class="n">Integer</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building a backend for backbone.js Todos example with Grails and MongoDB]]></title>
+    <link href="http://lauripiispanen.github.com/blog/2012/01/31/building-a-backend-for-backbone-dot-js-todos-example-with-grails-and-mongodb/"/>
+    <updated>2012-01-31T18:09:00+02:00</updated>
+    <id>http://lauripiispanen.github.com/blog/2012/01/31/building-a-backend-for-backbone-dot-js-todos-example-with-grails-and-mongodb</id>
+    <content type="html"><![CDATA[<p>In case you haven&#8217;t yet tried it yet, <a href="http://documentcloud.github.com/backbone/">Backbone.js</a> is a wonderful little JavaScript MVC framework. Ditto for <a href="http://grails.org/">Grails</a>! And soon you&#8217;ll see that they are a great match for each other - in this post, we&#8217;ll build a backend for the Backbone.js ToDo example using Grails and MongoDB.</p>
+
+<p>You can fork the completed example application <a href="https://github.com/lauripiispanen/grails-backbone-mongodb-example">here</a>.</p>
+
+<!-- more -->
+
+
+<p>First, let&#8217;s create the Grails application and install mongodb plugin. We&#8217;ll also uninstall the default hibernate plugin. I&#8217;ll be using the new Grails 2.0 interactive console throughout this entry. First, edit <em>grails-app/conf/BuildConfig.groovy</em> and replace this line:</p>
+
+<pre><code>runtime ":hibernate:$grailsVersion"
+</code></pre>
+
+<p>with this to install the Grails MongoDB plugin:</p>
+
+<pre><code>runtime ":mongodb:latest.integration"
+</code></pre>
+
+<p>&#8230;and configure Grails to mount into root context in development mode. Add this to <em>grails-app/conf/Config.groovy</em>:</p>
+
+<pre><code>grails.app.context = "/"
+</code></pre>
+
+<p>and run the app with <em>run-app</em>:</p>
+
+<pre><code>$ grails
+grails&gt; run-app
+</code></pre>
+
+<p>Next up, let&#8217;s copy the .js, .css and .png files from the standard backbone.js todo example into our <em>/web-app/</em> folder, and overwrite our <em>grails-app/views/index.gsp</em> with <em>index.html</em> from the example app. At this point the index file will appear if you start the app, but none of the JavaScript code is working - it&#8217;s pointing to <em>/test/vendor/</em> etc. We&#8217;ll change the app to use the Grails 2.0 Static Resources plugin and its bundles. You should have the following files in place:</p>
+
+<pre><code>web-app/backbone.js
+web-app/underscore.js
+web-app/todos.js
+web-app/destroy.png
+web-app/todos.css
+</code></pre>
+
+<p>First, we create the resources bundle for our app in <em>grails-app/conf/TodoResources.groovy</em>:</p>
+
+<pre><code>modules = {
+    todo {
+        dependsOn 'jquery, underscore, backbone'
+
+        resource url: '/todos.css'
+        resource url: '/todos.js'
+    }
+    backbone {
+        resource url: '/backbone.js'
+    }
+    underscore {
+        resource url: '/underscore.js'
+    }
+}
+</code></pre>
+
+<p>And then we create a layout to include our bundle on the page. You can repurpose the existing <em>grails-app/views/layouts/main.gsp</em> to suit our needs.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+        &lt;head&gt;
+                &lt;title&gt;&lt;g:layoutTitle default="Grails"/&gt;&lt;/title&gt;
+                &lt;g:layoutHead/&gt;
+                &lt;r:layoutResources /&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+                &lt;g:layoutBody/&gt;
+                &lt;r:layoutResources /&gt;
+        &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>And then we take the layout in use by removing all css links from <em>index.gsp</em> and replacing them with:</p>
+
+<pre><code>&lt;r:require module="todo" /&gt;
+&lt;meta name="layout" content="main"&gt;
+</code></pre>
+
+<p>At this point your todo application should <em>almost</em> work. It&#8217;s complaining about the missing localstorage plugin, which is fine because we&#8217;re about to replace it anyway. So just remove this line from <em>todos.js</em>:</p>
+
+<pre><code>localStorage: new Store("todos"),
+</code></pre>
+
+<p>and replace it with:</p>
+
+<pre><code>url: '/todos',
+</code></pre>
+
+<p>But now the todos app is complaining that it can&#8217;t find that URL. Which is fine - that just means that its happily trying to get our list of todos from the server, but can&#8217;t. No problemo, so that means we need to create a controller that will be our main AJAX endpoint.</p>
+
+<pre><code>grails&gt; create-controller todo.TodosController
+</code></pre>
+
+<p>&#8230;which nicely maps to the aforementioned <em>/todos</em> thanks to Grails default conventions. Sweet! We&#8217;ll also add an action to the controller that gives us a list of todo items. For now we&#8217;ll just return an empty list in JSON. This is where Grails converters come really handy:</p>
+
+<pre><code>package todo
+
+import grails.converters.JSON 
+
+class TodosController {
+
+    def index() {
+        render( [] as JSON )
+    }
+}
+</code></pre>
+
+<p>At this point our app is <em>nearly</em> working! We can see Backbone POSTing changes to our todos to the server. But nothing&#8217;s being persisted yet, so if we refresh the page, our todo list is blank again. So, what we need in order to persist our data, is a domain class that mirrors the one that we have in our Todo backbone.js example:</p>
+
+<pre><code>grails&gt; create-domain-class todo.Todo
+</code></pre>
+
+<p>In <em>grails-app/domain/todo/Todo.groovy</em>:</p>
+
+<pre><code>package todo
+
+class Todo {
+
+    boolean done
+    int order
+    String text
+
+    static constraints = {
+        text(nullable: false, empty: false)
+    }
+}
+</code></pre>
+
+<p>And we&#8217;ll also change our controller action to list all of our todo items:</p>
+
+<pre><code>def index() {
+    render( Todo.findAll() as JSON )
+}
+</code></pre>
+
+<p>But so far we don&#8217;t have any todos in the database, so the list is empty! Looking at AJAX traffic in Web Inspector, we see that whenever todos are updated, Backbone syncs them with the server via POSTs.</p>
+
+<p><img src="http://lauripiispanen.github.com/images/posts/web_inspector.png"></p>
+
+<p>So, to create some nice RESTful URLs for our todo app, we&#8217;ll just define them in <em>grails-app/conf/UrlMappings.groovy</em>:</p>
+
+<pre><code>"/todos/$id?"(controller: "todos") {
+    action = [GET:"list", POST: "save", DELETE: "delete", PUT: "edit"]
+}
+</code></pre>
+
+<p>And a corresponding action to bind incoming POST data to a new todo item and save it:</p>
+
+<pre><code>def save() {
+    def todo = new Todo(request.JSON)
+    render( todo.save() as JSON )
+}
+</code></pre>
+
+<p>BAM! Our new todo items are persisted in MongoDB! Just like you guessed, DELETE is just as simple.</p>
+
+<pre><code>def delete() {
+    def todo = Todo.findById(params.id)
+    todo?.delete()
+    render(todo as JSON )
+}
+</code></pre>
+
+<p>Now we can add and remove items. This is all nice and cool. However, what would a todo app be without a chance to complete some items? Backbone calls <em>.save()</em> on each update of a model item, and that translates to a PUT request to our backend. Based on our URL mappings, we&#8217;ll still need to implement an <em>edit()</em> action:</p>
+
+<pre><code>def edit() {
+    def todo = Todo.findById(params.id)
+    bindData(todo, request.JSON)
+    render(todo.save() as JSON )                
+}
+</code></pre>
+
+<p>And that&#8217;s it! Our todo state now successfully propagates to the server! Job well done&#8230; oh wait! When we click on the checkboxes, nothing happens. And the original todo demo has a cool <em>&#8220;X tasks left&#8221;</em> that is not displayed in our application. What gives? Let&#8217;s take a look at the Grails view template we use - bring up <em>index.gsp</em>:</p>
+
+<pre><code>&lt;% if (total) { %&gt;
+    &lt;span class="todo-count"&gt;
+        &lt;span class="number"&gt;&lt;%= remaining %&gt;&lt;/span&gt;
+        &lt;span class="word"&gt;&lt;%= remaining == 1 ? 'item' : 'items' %&gt;&lt;/span&gt; left.
+    &lt;/span&gt;
+&lt;% } %&gt;
+&lt;% if (done) { %&gt;
+    &lt;span class="todo-clear"&gt;
+        &lt;a href="#"&gt;
+            Clear &lt;span class="number-done"&gt;&lt;%= done %&gt;&lt;/span&gt;
+            completed &lt;span class="word-done"&gt;&lt;%= done == 1 ? 'item' : 'items' %&gt;&lt;/span&gt;
+        &lt;/a&gt;
+    &lt;/span&gt;
+&lt;% } %&gt;
+</code></pre>
+
+<p>A-ha! There&#8217;s some underscore templates. But those look just like GSP scriptlets! And just as well, they don&#8217;t show up in the generated markup. We need to fix those. Luckily there is a way to change how underscore interpolates the templates. Just put this at the top of <em>todos.js</em>:</p>
+
+<pre><code>_.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g,
+    evaluate : /\{!(.+?)!\}/g
+};
+</code></pre>
+
+<p>And now we can change our templates to a nicer (nicer to .gsp that is) format. Just change all <em>&lt;%=</em> and <em>%></em> scriptlets to <em>{{</em> and <em>}}</em> respectively, and <em>&lt;%</em> and <em>%></em> to <em>{!</em> and <em>!}</em> and voila! A complete todo application! Albeit there&#8217;s no authentication and multi-user and and and&#8230; Perhaps we&#8217;ll add those later!</p>
+]]></content>
+  </entry>
+  
+</feed>
