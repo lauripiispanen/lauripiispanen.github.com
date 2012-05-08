@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Groovy primitive type cast gotcha when upgrading to Grails 2.0 - Lauri Piispanen</title>
+  <title>Responsive design: forget about the media queries - Lauri Piispanen</title>
   <meta name="author" content="Lauri Piispanen">
 
   
-  <meta name="description" content="When upgrading our Grails applications from 1.3.x to 2.0, I got burned by this slight change of semantics in Groovy 1.8.x: Groovy 1.7.9: 1
-2
-groovy: &hellip;">
+  <meta name="description" content="Let&#8217;s just put it out front: responsive design is a marketing term. There, now that you&#8217;ve finished scoffing as I have deeply shocked &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ groovy: &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0">
+  <link rel="canonical" href="http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +79,7 @@ groovy: &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Groovy Primitive Type Cast Gotcha When Upgrading to Grails 2.0</h1>
+      <h1 class="entry-title">Responsive Design: Forget About the Media Queries</h1>
     
     
       <p class="meta">
@@ -97,7 +95,7 @@ groovy: &hellip;">
   
 
 
-<time datetime="2012-02-23T18:13:00+02:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time>
+<time datetime="2012-05-09T00:05:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,49 +104,31 @@ groovy: &hellip;">
   </header>
 
 
-<div class="entry-content"><p>When upgrading our Grails applications from 1.3.x to 2.0, I got burned by this slight change of semantics in Groovy 1.8.x:</p>
+<div class="entry-content"><p>Let&#8217;s just put it out front: responsive design is a marketing term. There, now that you&#8217;ve finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: <a href="http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html">a lot</a> of discussion around responsive design gloriously <a href="http://mediaqueri.es/">misses the point</a>.</p>
 
-<p>Groovy 1.7.9:</p>
+<p><span class='pullquote-right' data-pullquote='&#8216;best way to achieve responsiveness&#8217; depends on your strategy, process and competences'>
+&#8220;Handheld devices don&#8217;t show traditional websites well&#8221;, that much is agreed - but beyond that, pretty much everybody has there own opinion. While <a href="http://www.lukew.com/ff/entry.asp?1390">some</a> build separate sites for handhelds and others warn against <a href="http://www.alistapart.com/articles/responsive-web-design/">siloing content</a> to a separate domains. So what&#8217;s a company looking to go mobile to do?</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">groovy:</span><span class="mi">000</span><span class="o">&gt;</span> <span class="kc">null</span> <span class="n">as</span> <span class="kt">int</span>
-</span><span class='line'><span class="o">===&gt;</span> <span class="kc">null</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Heck, there&#8217;s even a case here in Finland where the CMS provider for a bank recommended simply to <a href="http://www.ch5finland.com/ajankohtaista/artikkelit/fi_FI/mobiilioptimointi/">increase the size of touch targets</a> (only in Finnish, sorry)! Well, that&#8217;s their process and what they deemed to be the most cost-effective solution for their customer and I won&#8217;t go deeper into that. Another company found that <a href="http://twitter.com/#!/dumbstereo/status/198309896402378752">creating multiple native apps</a> was more cost-effective than going fully responsive. And therein lies a seed of truth: <em>&#8216;best way to achieve responsiveness&#8217; depends on your strategy, process and competences</em>.
+</span></p>
 
+<p><a href="http://www.netmagazine.com/opinions/separate-mobile-website-no-forking-way">Some people</a> lay the blame of rigidity on antiquated CMSes, using WordPress and Drupal as an example of a web CMS no longer cutting it in a multi-screen world. But what if you&#8217;re a kick-ass PHP house (underlying factor here: competencies), and your <em>strategy</em> does not mandate business rules to determine what to publish and where? I can&#8217;t see a reason why you couldn&#8217;t create a template good enough to cater for different experiences. Now then, if your needs go beyond that, one can question the choice of Wordpress or Drupal in the first place.</p>
 
-<p>Groovy 1.8.0:</p>
+<p>I have been working almost exclusively with mobile web from 2005, starting when we were creating a mobile site for a very high-profile customer that went on to win several Webbys. Back then we had to maintain a WML site for some browsers, but the main focus was still HTML. Nevertheless, the main drivers in choosing an implementation method were the three factors above. We had to go with pure server-side technologies since the devices couldn&#8217;t handle anything else (RAZR, anyone?). For <em>process</em> reasons the site couldn&#8217;t be served off the same domain as the main site - a separate team building a separate codebase would not be allowed to touch the main web servers. Due to <em>competence</em> reasons the customer was not building the site themselves as it was not part of their <em>strategy</em> to acquire these competencies.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="nl">groovy:</span><span class="mi">000</span><span class="o">&gt;</span> <span class="kc">null</span> <span class="n">as</span> <span class="kt">float</span>
-</span><span class='line'><span class="n">ERROR</span> <span class="n">org</span><span class="o">.</span><span class="na">codehaus</span><span class="o">.</span><span class="na">groovy</span><span class="o">.</span><span class="na">runtime</span><span class="o">.</span><span class="na">typehandling</span><span class="o">.</span><span class="na">GroovyCastException</span><span class="o">:</span>
-</span><span class='line'><span class="n">Cannot</span> <span class="n">cast</span> <span class="n">object</span> <span class="err">&#39;</span><span class="kc">null</span><span class="err">&#39;</span> <span class="n">with</span> <span class="kd">class</span> <span class="err">&#39;</span><span class="nc">null</span><span class="err">&#39;</span> <span class="n">to</span> <span class="kd">class</span> <span class="err">&#39;</span><span class="nc">float</span><span class="err">&#39;</span><span class="o">.</span> <span class="n">Try</span> <span class="err">&#39;</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Float</span><span class="err">&#39;</span> <span class="n">instead</span>
-</span></code></pre></td></tr></table></div></figure>
+<p><span class='pullquote-right' data-pullquote='questions like &#8220;should I use responsive design or build a separate codebase&#8221; are both moronic and pointless'>
+<a href="http://stephanierieger.com/responsiveness-is-a-characteristic/">Stephanie Rieger</a> raises excellent points to the discussion: to the user it does not matter whether or not your site is based on a different CSS, different HTML-files, different frontend codebase or even completely different programming language. What is relevant to the end user is a good experience, whereas what is relevant to the company is to get the best value for money and empower their own employees as much as possible. And for that reason, questions like &#8220;should I use responsive design or build a separate codebase&#8221; are both moronic and pointless. Instead, ask yourself:</p>
 
-
-<p>Turns out this can bite you in quite many places. A very common pattern occurring in our taglibs was to cast attributes, even if they were optional. Like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">def</span> <span class="n">myTag</span> <span class="o">=</span> <span class="o">{</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">body</span> <span class="o">-&gt;</span>
-</span><span class='line'>  <span class="n">def</span> <span class="n">height</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">&quot;height&quot;</span><span class="o">)</span> <span class="n">as</span> <span class="kt">int</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li> How can I build the best experience with the skills that I have / can learn?</li>
+<li> What will give me best ROI in both short and long run?</li>
+</ul>
 
 
-<p>Which would&#8217;ve simply assigned <em>null</em> to <em>height</em> in Grails 1.3.x. Luckily you can just change your casts to boxed versions of the primitives (i.e. <em>as Integer</em>, <em>as Long</em> etc) and be done with it.</p>
+<p>I can build an RIA app with media queries, client-side JavaScript or server-side Java, JavaScript, Python - you name it. What I will choose to build it with depends on scope of the app and competencies of the customer.
+</span></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">def</span> <span class="n">myTag</span> <span class="o">=</span> <span class="o">{</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">body</span> <span class="o">-&gt;</span>
-</span><span class='line'>  <span class="n">def</span> <span class="n">height</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">&quot;height&quot;</span><span class="o">)</span> <span class="n">as</span> <span class="n">Integer</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p>If the case is a corporate blog that needs to look good on the CEOs Galaxy S III, I&#8217;ll gladly hack it together on Wordpress. If you want to maintain your current website with the skillsets that you have in place, and don&#8217;t plan on expanding towards anywhere RIA-ish, I wholeheartedly recommend media queries and sprinkled-on JavaScript. But if you want a native app-like experience (damn it with these marketing terms already), most of the code will be straight-up JavaScript, and it&#8217;s going to look and feel so different on a Galaxy Tab vs. iPhone - in a good way. And it&#8217;s still responsive even though you can&#8217;t resize your window on the fly. Heck, I&#8217;ll even be nice enough not to cause your device to <a href="http://www.bram.us/2012/03/01/the-slow-elephant-in-the-responsive-images-room/">download all the images twice</a>.</p>
 </div>
 
 
@@ -171,21 +151,15 @@ groovy: &hellip;">
   
 
 
-<time datetime="2012-02-23T18:13:00+02:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2012</time>
+<time datetime="2012-05-09T00:05:00+03:00" pubdate data-updated="true">May 9<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/grails/'>Grails</a>, <a class='category' href='/blog/categories/groovy/'>Groovy</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/" data-via="lauripiispanen" data-counturl="http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries/" data-via="lauripiispanen" data-counturl="http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -198,10 +172,8 @@ groovy: &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/01/31/building-a-backend-for-backbone-dot-js-todos-example-with-grails-and-mongodb/" title="Previous Post: Building a backend for backbone.js Todos example with Grails and MongoDB">&laquo; Building a backend for backbone.js Todos example with Grails and MongoDB</a>
+        <a class="basic-alignment left" href="/blog/2012/04/25/what-is-the-best-irc-server-how-about-flowdock/" title="Previous Post: What is the best IRC Server? How about Flowdock?">&laquo; What is the best IRC Server? How about Flowdock?</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/03/05/best-way-to-kill-html5-tablet-app-performance/" title="next Post: Best way to kill your HTML5 tablet app performance">Best way to kill your HTML5 tablet app performance &raquo;</a>
       
     </p>
   </footer>
@@ -313,8 +285,8 @@ groovy: &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/';
-        var disqus_url = 'http://lauripiispanen.github.com/blog/2012/02/23/groovy-primitive-type-cast-gotcha-when-upgrading-to-grails-2-dot-0/';
+        var disqus_identifier = 'http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries/';
+        var disqus_url = 'http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries/';
         var disqus_script = 'embed.js';
       
     (function () {
