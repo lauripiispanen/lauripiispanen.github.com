@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Responsive design: forget about the media queries"
+title: "Responsive websites: forget about the media queries"
 date: 2012-05-09 00:05
 comments: true
 categories: 
 ---
 
-Let's just put it out front: responsive design is a marketing term. There, now that you've finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: [a lot](http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html) of discussion around responsive design gloriously [misses the point](http://mediaqueri.es/). 
+Let's just put it out front: responsive design is a marketing term. There, now that you've finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: [a lot](http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html) of discussion around making websites responsive gloriously [misses the point](http://mediaqueri.es/). 
 
 <!-- more -->
 
