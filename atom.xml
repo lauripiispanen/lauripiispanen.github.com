@@ -4,7 +4,7 @@
   <title><![CDATA[Lauri Piispanen]]></title>
   <link href="http://lauripiispanen.github.com/atom.xml" rel="self"/>
   <link href="http://lauripiispanen.github.com/"/>
-  <updated>2012-05-09T01:32:17+03:00</updated>
+  <updated>2012-05-09T01:34:29+03:00</updated>
   <id>http://lauripiispanen.github.com/</id>
   <author>
     <name><![CDATA[Lauri Piispanen]]></name>
@@ -19,6 +19,9 @@
     <updated>2012-05-09T00:05:00+03:00</updated>
     <id>http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries</id>
     <content type="html"><![CDATA[<p>Let&#8217;s just put it out front: responsive design is a marketing term. There, now that you&#8217;ve finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: <a href="http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html">a lot</a> of discussion around responsive design gloriously <a href="http://mediaqueri.es/">misses the point</a>.</p>
+
+<!-- more -->
+
 
 <p><span class='pullquote-right' data-pullquote='&#8216;best way to achieve responsiveness&#8217; depends on your strategy, process and competences'>
 &#8220;Handheld devices don&#8217;t show traditional websites well&#8221;, that much is agreed - but beyond that, pretty much everybody has there own opinion. While <a href="http://www.lukew.com/ff/entry.asp?1390">some</a> build separate sites for handhelds and others warn against <a href="http://www.alistapart.com/articles/responsive-web-design/">siloing content</a> to a separate domains. So what&#8217;s a company looking to go mobile to do?</p>
