@@ -8,6 +8,8 @@ categories:
 
 Let's just put it out front: responsive design is a marketing term. There, now that you've finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: [a lot](http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html) of discussion around responsive design gloriously [misses the point](http://mediaqueri.es/). 
 
+<!-- more -->
+
 {% pullquote %}
 "Handheld devices don't show traditional websites well", that much is agreed - but beyond that, pretty much everybody has there own opinion. While [some](http://www.lukew.com/ff/entry.asp?1390) build separate sites for handhelds and others warn against [siloing content](http://www.alistapart.com/articles/responsive-web-design/) to a separate domains. So what's a company looking to go mobile to do?
 
