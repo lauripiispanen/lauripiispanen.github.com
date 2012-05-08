@@ -4,7 +4,7 @@
   <title><![CDATA[Lauri Piispanen]]></title>
   <link href="http://lauripiispanen.github.com/atom.xml" rel="self"/>
   <link href="http://lauripiispanen.github.com/"/>
-  <updated>2012-05-09T01:34:29+03:00</updated>
+  <updated>2012-05-09T01:42:23+03:00</updated>
   <id>http://lauripiispanen.github.com/</id>
   <author>
     <name><![CDATA[Lauri Piispanen]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Responsive design: forget about the media queries]]></title>
-    <link href="http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries/"/>
+    <title type="html"><![CDATA[Responsive websites: forget about the media queries]]></title>
+    <link href="http://lauripiispanen.github.com/blog/2012/05/09/responsive-websites-forget-about-the-media-queries/"/>
     <updated>2012-05-09T00:05:00+03:00</updated>
-    <id>http://lauripiispanen.github.com/blog/2012/05/09/responsive-design-forget-about-the-media-queries</id>
-    <content type="html"><![CDATA[<p>Let&#8217;s just put it out front: responsive design is a marketing term. There, now that you&#8217;ve finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: <a href="http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html">a lot</a> of discussion around responsive design gloriously <a href="http://mediaqueri.es/">misses the point</a>.</p>
+    <id>http://lauripiispanen.github.com/blog/2012/05/09/responsive-websites-forget-about-the-media-queries</id>
+    <content type="html"><![CDATA[<p>Let&#8217;s just put it out front: responsive design is a marketing term. There, now that you&#8217;ve finished scoffing as I have deeply shocked your designer world, allow me to rephrase that: <a href="http://fitandfinish.ironworks.com/2011/05/the-future-of-web-design-will-be-responsive.html">a lot</a> of discussion around making websites responsive gloriously <a href="http://mediaqueri.es/">misses the point</a>.</p>
 
 <!-- more -->
 
