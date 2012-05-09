@@ -11,7 +11,7 @@ Let's just put it out front: responsive design is a marketing term. There, now t
 <!-- more -->
 
 {% pullquote %}
-"Handheld devices don't show traditional websites well", that much is agreed - but beyond that, pretty much everybody has there own opinion. While [some](http://www.lukew.com/ff/entry.asp?1390) build separate sites for handhelds and others warn against [siloing content](http://www.alistapart.com/articles/responsive-web-design/) to a separate domains. So what's a company looking to go mobile to do?
+"Handheld devices don't show traditional websites well", that much is agreed - but beyond that, pretty much everybody has their own opinion. While [some](http://www.lukew.com/ff/entry.asp?1390) build separate sites for handhelds and others warn against [siloing content](http://www.alistapart.com/articles/responsive-web-design/) to a separate domains. So what's a company looking to "go mobile" to do?
 
 Heck, there's even a case here in Finland where the CMS provider for a bank recommended simply to [increase the size of touch targets](http://www.ch5finland.com/ajankohtaista/artikkelit/fi_FI/mobiilioptimointi/) (only in Finnish, sorry)! Well, that's their process and what they deemed to be the most cost-effective solution for their customer and I won't go deeper into that. Another company found that [creating multiple native apps](http://twitter.com/#!/dumbstereo/status/198309896402378752) was more cost-effective than going fully responsive. And therein lies a seed of truth: *{"'best way to achieve responsiveness' depends on your strategy, process and competences"}*.
 {% endpullquote %}
@@ -26,7 +26,7 @@ I have been working almost exclusively with mobile web from 2005, starting when 
    * How can I build the best experience with the skills that I have / can learn?
    * What will give me best ROI in both short and long run?
 
-I can build an RIA app with media queries, client-side JavaScript or server-side Java, JavaScript, Python - you name it. What I will choose to build it with depends on scope of the app and competencies of the customer.
+I can build an responsive app with media queries, client-side JavaScript or server-side Java, JavaScript, Python - you name it. What I will choose to build it with depends on scope of the app and competencies of the customer.
 {% endpullquote %}
 
 If the case is a corporate blog that needs to look good on the CEOs Galaxy S III, I'll gladly hack it together on Wordpress. If you want to maintain your current website with the skillsets that you have in place, and don't plan on expanding towards anywhere RIA-ish, I wholeheartedly recommend media queries and sprinkled-on JavaScript. But if you want a native app-like experience (damn it with these marketing terms already), most of the code will be straight-up JavaScript, and it's going to look and feel so different on a Galaxy Tab vs. iPhone - in a good way. And it's still responsive even though you can't resize your window on the fly. Heck, I'll even be nice enough not to cause your device to [download all the images twice](http://www.bram.us/2012/03/01/the-slow-elephant-in-the-responsive-images-room/).
