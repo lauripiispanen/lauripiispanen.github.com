@@ -4,7 +4,6 @@ title: "Packing up: Moving Our Grails Plugins From SVN to Git"
 date: 2012-05-28 16:35
 comments: true
 categories: Grails SVN Git
-published: false
 ---
 
 As part of the migration from SVN over to Git in our company, we also need to transport our internal Grails plugins to the new repo structure. These plugins have been developed since Grails 1.1.x, and as such, there's a thing or two that have changed over the years - in terms of how grails plugins are stored in a repo and how the published artifacts are resolved.
