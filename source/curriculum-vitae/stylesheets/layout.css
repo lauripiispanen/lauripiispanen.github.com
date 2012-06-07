@@ -50,6 +50,9 @@ img.portrait {
 		img.portrait {
 			 max-width: 50%;
 		}
+		.job-description {
+			display: none;
+		}
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
