@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Android - Lauri Piispanen</title>
+  <title>Packing up: Moving Our Grails Plugins From SVN to Git - Lauri Piispanen</title>
   <meta name="author" content="Lauri Piispanen">
 
   
-  <meta name="description" content="Category: Android">
+  <meta name="description" content="As part of the migration from SVN over to Git in our company, we also need to transport our internal Grails plugins to the new repo structure. These &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lauripiispanen.github.comblog/categories/android">
+  <link rel="canonical" href="http://lauripiispanen.github.com/blog/2012/05/28/packing-up-moving-our-grails-plugins-from-svn-to-git">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -75,36 +75,138 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Android</h1>
+    
+      <h1 class="entry-title">Packing Up: Moving Our Grails Plugins From SVN to Git</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-28T16:35:00+03:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>As part of the migration from SVN over to Git in our company, we also need to transport our internal Grails plugins to the new repo structure. These plugins have been developed since Grails 1.1.x, and as such, there&#8217;s a thing or two that have changed over the years - in terms of how grails plugins are stored in a repo and how the published artifacts are resolved.</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/03/05/best-way-to-kill-html5-tablet-app-performance/">Best way to kill your HTML5 tablet app performance</a></h1>
-<time datetime="2012-03-05T20:28:00+02:00" pubdate><span class='month'>Mar</span> <span class='day'>05</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>Android</a>, <a class='category' href='/blog/categories/html5/'>HTML5</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/ria/'>RIA</a>, <a class='category' href='/blog/categories/iphone/'>iPhone</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<p>When our internal plugin development process started, we were still using Grails 1.1. Grails plugins were a wonderful way for us to encapsulate functionality, so that we didn&#8217;t have to reinvent the wheel with every new customer project.</p>
 
+<p>Grails 1.1 relied heavily on SVN, whereas starting from 1.2 versions of Grails, migration towards <a href="http://ant.apache.org/ivy/">Apache Ivy</a> dependency resolution began to take place. Back then, the <em>right way</em> to publish plugins was to store them in an SVN repository as .zip files. While this feels &#8220;unclean&#8221; to how I see repos should be used, it was supported out of the box in Grails, and the process of using it was rather straightforward, so we stuck with it.</p>
+
+<p>Fast-forward over to Grails 2.x, and the <em>correct</em> way to handle plugins is to set up an Ivy/Maven compliant repository and publish the .zip artefacts there. In fact, the old way of having the .zip artefacts in SVN is <a href="http://jira.grails.org/browse/GPRELEASE-36">no longer</a> supported at all.</p>
+
+<p>So, to move over to Git, we would need to do two things:</p>
+
+<ol>
+<li>Use <em>git svn</em> to init the new repo and fetch the changes</li>
+<li>Create an authors file to link committers across repositories</li>
+<li>We need to get rid of the .zip files in our new git repo and move them to <a href="http://www.jfrog.com/products.php">Artifactory</a> instead</li>
+</ol>
+
+
+<p>To do this, we would use three commands:</p>
+
+<pre><code>$ git svn init --no-minimize-url [SVN-repo]
+</code></pre>
+
+<p>The init command sets up a new git repo in an empty local dir, and <em>svn init</em> adds the appropriate remote refs to Git. Our SVN repo was laid out so that each plugin was in a subfolder in the repo root, and that subfolder followed the standard trunk/tags/branches layout, so I added <em>&#8211;no-minimize-url</em> flag to ensure that git svn considered the provided url the root of the repo, and would not attempt to navigate down towards the actual repo root.</p>
+
+<pre><code>$ git svn fetch --authors-file=[authors-file]
+</code></pre>
+
+<p>Then I did an svn fetch for the remote refs, providing an authors file so that committers could be mapped correctly to Git. And authors file is a simple text file with each line corresponding to a different author:</p>
+
+<pre><code>lpiispanen = Lauri Piispanen &lt;lauri.piispanen@my-email-address-is-gone.com&gt;
+jdoe = John Doe &lt;john.doe@my-email-address-is-gone.com&gt;
+</code></pre>
+
+<p>Finally, I wanted to get rid of all the published artefacts in the SVN dirs, and <em>filter-branch</em> allowed me to do just that. An additional benefit of <em>filter-branch</em> is that it shrinks down the entire repo size - as if the artefacts had never been committed in the first place. You probably would not want to do this on an existing repo, since then the clones that people have already taken will face some nasty history conflicts - but as we&#8217;re working on a brand new Git repo, it&#8217;s fine:</p>
+
+<pre><code>$ git filter-branch --index-filter 'git rm --cached --ignore-unmatch grails-*.zip' HEAD
+</code></pre>
+
+<p>That&#8217;s it! We now have a clean git repo, ready to be pushed to a different remote. Now, the next step is to push the .zip artefacts to Artefactory and we can archive the SVN repo entirely.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Lauri Piispanen</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-28T16:35:00+03:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>Git</a>, <a class='category' href='/blog/categories/grails/'>Grails</a>, <a class='category' href='/blog/categories/svn/'>SVN</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://lauripiispanen.github.com/blog/2012/05/28/packing-up-moving-our-grails-plugins-from-svn-to-git/" data-via="lauripiispanen" data-counturl="http://lauripiispanen.github.com/blog/2012/05/28/packing-up-moving-our-grails-plugins-from-svn-to-git/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/09/responsive-websites-forget-about-the-media-queries/" title="Previous Post: Responsive websites: forget about the media queries">&laquo; Responsive websites: forget about the media queries</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -211,7 +313,10 @@
       var disqus_shortname = 'lauripiispanen';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://lauripiispanen.github.com/blog/2012/05/28/packing-up-moving-our-grails-plugins-from-svn-to-git/';
+        var disqus_url = 'http://lauripiispanen.github.com/blog/2012/05/28/packing-up-moving-our-grails-plugins-from-svn-to-git/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
